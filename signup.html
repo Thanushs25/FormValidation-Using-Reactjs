@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Signup Page</title>
+    <link rel="stylesheet" type="text/css" href="login.css">
+    <script src="validation.js"></script>
+
+    <script>
+      const firstname = document.getElementById('fname');
+      const lastname = document.getElementById('lname');
+      const email = document.getElementById('mail');
+      const dob = document.getElementById('datedob');
+      const gender = document.getElementById('gender');
+      const phoneno = document.getElementById('mno');
+      const insname = document.getElementById('ins');
+      const pass = document.getElementById('pass');
+      const cpass = document.getElementById('cpass');
+  
+  
+      insert.addEventListener('click',()=>{
+          var data = {
+              firstname:firstname.value,
+              lastname:lastname.value,
+              email:email.value,
+              dob:dob.value,
+              gender:gender.value,
+              phoneno:phoneno.value,
+              insname:insname.value,
+              pass:pass.value,
+              cpass:cpass.value
+          }
+          fetch('http://localhost:9000/api/db',{
+              method: "POST",
+              headers: {
+                  'Content-type': 'application/json; chatset=UTF-8'
+              },
+              body: JSON.stringify(data)
+          })
+          .then(res => {return res.json()})
+          .then(res => {result.innerText = JSON.stringify(res)});
+  
+      })
+  </script>
+  </head>
+  <body>
+    <div class="login-page">
+      <div class="avatar">
+        <img src="https://img.freepik.com/premium-vector/scholar-student-success-logo-icon-illustration-brand-identity_7109-1054.jpg" alt="Avatar">
+      </div>
+      <div class="form">
+        <h2>Signup</h2>
+        <form name="myform" onsubmit="validate()">
+          <input type="text" placeholder="First Name" id="fname">
+          <input type="text" placeholder="Last Name" id="lname">
+          <input type="email" placeholder="E-mail" id="mail">
+          <input type="date" placeholder="D.O.B" id="datedob">
+          <select name="Gender" id="gender" style="font-family: 'Roboto', sans-serif;
+          outline: none;
+          width: 100%;
+          border: 0;
+          margin: 0 0 15px;
+          padding: 15px;
+          box-sizing: border-box;
+          font-size: 14px;
+          border-radius: 20px;
+          background-color: rgba(255, 255, 255, 0.7);">
+            <option value="">Gender</option>
+            <option name="Gender" value="Male">Male</option>
+            <option name="Gender" value="Female">Female</option>
+            <option name="Gender" value="Prefer not to say">Prefer not to say</option>
+          </select>
+          <input type="text" id="mno" name="mno" placeholder="Mobile Number">
+          <input type="text" placeholder="Institution Name" id="ins">
+          <input type="password" placeholder="Password" id="pass">
+          <input type="password" placeholder="Confirm Password" id="cpass">
+          <button type="submit" onclick="window.location.href='https://localhost:3000/';">Register Now!!</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
